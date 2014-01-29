@@ -1,0 +1,89 @@
+# implementation of card game - Memory
+
+import simplegui
+import random
+# Global variables
+list1 = []
+exposed = [False]*16
+state = 0
+turns = 0
+index = -1
+index = -1
+index = -1
+
+# helper function to initialize globals variables 
+# Starts a new game 
+def new_game():
+    global list1, exposed, turns, index1, index2, index3
+    index = -1
+    index = -1
+    index = -1
+    state = 0
+    turns = 0
+    exposed = [False]*16
+    list1 = range(8)
+    list1.extend(range(8)) 
+    random.shuffle(list1)
+    
+#event handlers to handle mouse clicks
+def mouseclick(pos):
+    global exposed, state, index1, index2, turns
+    i = pos[0]//50
+    # Checks weather the card is exposed or not
+    if not exposed[i]:
+        if state == 0:
+            state = 1
+            index1 = pos[0]//50
+            exposed[index1] = True
+          
+            
+    # Handles the second mouse click    
+        elif state == 1:
+            state = 2
+            index2 = pos[0]//50
+            exposed[index2] = True
+            print index1, index2
+            
+    # Checks if the clicked cards are same or not and updates turns    
+        else:
+            state = 1
+            index3 = pos[0]//50
+            exposed[index3] = True
+            
+            if list1[index1] == list1[index2]:
+                turns += 1
+                index1 = index3
+            else:
+                turns += 1
+                exposed[index1] = False
+                exposed[index2] = False
+                index1 = index3
+                
+# to draw the cards   
+def draw(canvas):
+    global list1, exposed, turns
+    label.set_text("Turns =" + str(turns))
+    pos_card = [0,0]
+    
+    for i in range(len(list1)):
+        if exposed[i]:
+            canvas.draw_text(str(list1[i]),[20 + pos_card[0],pos_card[1]+60],40,"White")
+            pos_card[0] += 50
+       
+        else:
+            canvas.draw_polygon([[pos_card[0],pos_card[1]], [pos_card[0]+50, pos_card[1]], [pos_card[0]+50, pos_card[1]+100], [pos_card[0], pos_card[1] + 100]], 2, 'White', 'Green')
+            pos_card[0] +=50
+            
+# create frame and add a button and labels
+frame = simplegui.create_frame("Memory", 800, 100)
+frame.add_button("Restart", new_game)
+label = frame.add_label("Turns = 0")
+
+#event handlers for mouse click and to draw on the canvas
+frame.set_mouseclick_handler(mouseclick)
+frame.set_draw_handler(draw)
+
+# Starts the game
+new_game()
+frame.start()
+

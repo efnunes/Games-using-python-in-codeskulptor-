@@ -1,0 +1,11 @@
+1. Guess the number: http://www.codeskulptor.org/#user28_kXJmIbktdn_0.py
+
+2. Stopwatch : http://www.codeskulptor.org/#user28_i0I2uqpTDQXtF7l_2.py
+
+3. Pong : http://www.codeskulptor.org/#user28_r8PfVIYCZS_2.py
+
+4. Card Memory : http://www.codeskulptor.org/#user28_hYJaHbUEg9_20.py
+
+5. Blackjack : http://www.codeskulptor.org/#user28_1UEc43gZo8M5NIU_0.py
+
+6. Spaceship : http://www.codeskulptor.org/#user28_KbsPxw3NXX_21.py

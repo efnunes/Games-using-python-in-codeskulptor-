@@ -1,0 +1,96 @@
+#  "Stopwatch: The Game"
+import simplegui
+import math
+import random
+import time
+
+
+# define global variables
+Interval = 100
+time = 0
+D = 0
+hits = 0
+success = 0
+check = True
+
+
+# function format that converts time
+# in tenths of seconds into formatted string A:BC.D
+def format(t):
+    global A, D
+    x = t/10
+    D = t%10
+    if x > 60:
+        A = x/60
+        x = x%60
+        if x > 9:
+            return str(A)+':'+str(x)+'.'+str(D)
+        else:
+            return str(A)+':0'+str(x)+'.'+str(D)
+    elif x > 9:
+        return '0:'+str(x)+'.'+str(D)
+    else:
+        return '0:0'+str(x)+'.'+str(D)
+    
+
+# Starts the timer and the game
+def Start():
+    global check
+    check = True
+    timer.start()
+    
+    
+# Stops the timer
+def Stop():
+    global hits , success, D, check
+    timer.stop()
+    # checks for success or failure 
+    # Success is if you stop the timer on a zero.
+    if check:
+        if D == 0:
+            success = success + 1
+            hits = hits + 1
+            check = False
+        else:
+            hits = hits + 1
+            check = False
+
+
+# Resets the time as well as the success/hits
+def Reset():
+    global time, success , hits
+    time = 0
+    success = 0
+    hits = 0
+    timer.stop()
+   
+
+# time_handler which increments the time after each interval
+def stopwatch():
+    global time
+    time = time + 1
+    
+    
+# The draw_handler to display on the canvas
+def draw(canvas):
+    global time, success, hits
+    # displays the time in the desired format
+    canvas.draw_text(format(time), (70,110),30,'White')
+    # displays the success rate w.r.t to the number of hits
+    canvas.draw_text(str(success)+'/'+str(hits),(160,20),24,'Green')
+    
+    
+# create frame
+frame = simplegui.create_frame("Timer", 200, 200)
+frame.set_draw_handler(draw)
+
+
+# event_handlers for the buttons and the timer
+timer = simplegui.create_timer(Interval,stopwatch)
+button1 = frame.add_button('Start', Start, 100)
+button2 = frame.add_button('Stop', Stop, 100)
+button3 = frame.add_button('Reset', Reset, 100)
+
+
+#Start the frame to display
+frame.start()
