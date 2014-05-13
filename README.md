@@ -1,7 +1,7 @@
-Games-using-python-in-codeskulptor-
+## Games-using-python-in-codeskulptor-
 ===================================
 
-fun games using python
+### fun games using python
 
 These games were done as projects for an online course "Interactive programming in python" conducted bt Rice University.
 The code runs only in an online python compiler known as "CodeSkulptor" . 
